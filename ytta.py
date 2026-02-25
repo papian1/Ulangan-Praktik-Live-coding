@@ -98,6 +98,81 @@ def motivational_quotes():
 		print(f"- {q}")
 
 
+def weekly_exercise_schedule():
+	print("\nJadwal Olahraga Mingguan — Pilih level:")
+	print("1. Pemula (rendah-moderat)")
+	print("2. Menengah (moderate)")
+	print("3. Lanjutan (intensitas lebih tinggi)")
+	level = input("Pilih level (1-3): ").strip()
+
+	if level == "1":
+		schedule = [
+			("Senin", "Jalan cepat 30 menit"),
+			("Selasa", "Latihan kekuatan ringan 20-30 menit (bobot tubuh)"),
+			("Rabu", "Jalan cepat 30 menit atau yoga ringan 20 menit"),
+			("Kamis", "Peregangan + latihan inti 20 menit"),
+			("Jumat", "Jalan cepat 30-40 menit"),
+			("Sabtu", "Aktivitas lepas (sepeda/berenang) 30 menit"),
+			("Minggu", "Istirahat aktif: jalan santai & peregangan 20 menit"),
+		]
+	elif level == "2":
+		schedule = [
+			("Senin", "Jalan cepat / interval ringan 30-40 menit"),
+			("Selasa", "Latihan kekuatan 30-40 menit (2-3 set)"),
+			("Rabu", "Cardio ringan 30 menit (sepeda/renang)"),
+			("Kamis", "Latihan mobilitas + core 25 menit"),
+			("Jumat", "Cardio 30-45 menit"),
+			("Sabtu", "Latihan kekuatan 30 menit atau kelas grup"),
+			("Minggu", "Istirahat aktif / peregangan 20-30 menit"),
+		]
+	elif level == "3":
+		schedule = [
+			("Senin", "HIIT / interval 20-30 menit + pemulihan"),
+			("Selasa", "Latihan kekuatan berat 40-60 menit"),
+			("Rabu", "Cardio moderat 40 menit"),
+			("Kamis", "Latihan kekuatan fokus core & mobilitas 30-40 menit"),
+			("Jumat", "Cardio intens 30-45 menit"),
+			("Sabtu", "Latihan campuran atau olahraga tim 45-60 menit"),
+			("Minggu", "Pemulihan aktif: yoga / foam rolling 20-30 menit"),
+		]
+	else:
+		print("Level tidak dikenal — menampilkan jadwal pemula sebagai default.")
+		schedule = [
+			("Senin", "Jalan cepat 30 menit"),
+			("Selasa", "Latihan kekuatan ringan 20-30 menit (bobot tubuh)"),
+			("Rabu", "Jalan cepat 30 menit atau yoga ringan 20 menit"),
+			("Kamis", "Peregangan + latihan inti 20 menit"),
+			("Jumat", "Jalan cepat 30-40 menit"),
+			("Sabtu", "Aktivitas lepas (sepeda/berenang) 30 menit"),
+			("Minggu", "Istirahat aktif: jalan santai & peregangan 20 menit"),
+		]
+
+	print("\nRencana minggu ini:")
+	for day, act in schedule:
+		print(f"- {day}: {act}")
+
+	print("\nCatatan: Sesuaikan durasi dan intensitas berdasarkan kondisi Anda. Mulai perlahan jika baru kembali aktif.")
+
+	motivational_quotes()
+
+	# Opsi ekspor jadwal ke file teks
+	save = input("\nSimpan jadwal ini ke file teks? (y/n): ").strip().lower()
+	if save == "y":
+		default_name = "jadwal_mingguan.txt"
+		fn = input(f"Nama file (default: {default_name}): ").strip()
+		if not fn:
+			fn = default_name
+		try:
+			with open(fn, "w", encoding="utf-8") as f:
+				f.write("Jadwal Olahraga Mingguan\n")
+				f.write(f"Level: {('Pemula' if level=='1' else 'Menengah' if level=='2' else 'Lanjutan' if level=='3' else 'Default')}\n\n")
+				for day, act in schedule:
+					f.write(f"{day}: {act}\n")
+			print(f"Jadwal tersimpan di: {fn}")
+		except Exception as e:
+			print(f"Gagal menyimpan file: {e}")
+
+
 def exercise_and_recovery():
 	print("\nRekomendasi Olahraga & Pemulihan:")
 	print("- Latihan aerobik 150 menit/minggu (jalan cepat, bersepeda, berenang)")
@@ -219,6 +294,7 @@ def menu():
 		print("6. Rekomendasi olahraga sesuai berat/BMI")
 		print("7. Rekomendasi makanan harian & mingguan")
 		print("8. Kata-kata motivasi untuk semangat hidup sehat")
+		print("9. Jadwal olahraga mingguan")
 		print("0. Keluar")
 		choice = input("Masukkan pilihan: ").strip()
 		if choice == "1":
@@ -237,6 +313,8 @@ def menu():
 			recommend_meals_detailed()
 		elif choice == "8":
 			motivational_quotes()
+		elif choice == "9":
+			weekly_exercise_schedule()
 		elif choice == "0":
 			print("Terima kasih — semoga hidup sehat!")
 			break
