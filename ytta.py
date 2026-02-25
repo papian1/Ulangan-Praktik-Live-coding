@@ -8,6 +8,7 @@ Fitur:
 - Hitung kebutuhan kalori sederhana (BMR + faktor aktivitas)
 """
 import sys
+import random
 
 
 def print_header():
@@ -80,6 +81,23 @@ def recommend_meals_detailed():
 	print("- Jika ingin menurunkan berat badan, kurangi 300-500 kcal/hari dari kebutuhan estimasi; jika menambah berat, tambah 300-500 kcal/hari dengan fokus protein.")
 
 
+def motivational_quotes():
+	quotes = [
+		"Kebiasaan kecil hari ini akan membentuk kesehatan besok.",
+		"Satu langkah kecil lebih baik daripada tidak sama sekali.",
+		"Konsistensi lebih penting daripada kesempurnaan.",
+		"Jaga tubuhmu — itu satu-satunya tempat tinggal yang kamu punya.",
+		"Mulai sekarang: lebih banyak gerak, lebih sedikit penyesalan.",
+		"Perubahan besar dimulai dari keputusan kecil setiap hari.",
+		"Makan sehat adalah bentuk cinta pada diri sendiri.",
+		"Jangan menunggu motivasi—bangun kebiasaan yang membuatnya bertahan."
+	]
+	print("\nKata-kata Motivasi untuk Semangat Hidup Sehat:\n")
+	# tampilkan 3 kutipan acak tanpa duplikasi
+	for q in random.sample(quotes, k=min(3, len(quotes))):
+		print(f"- {q}")
+
+
 def exercise_and_recovery():
 	print("\nRekomendasi Olahraga & Pemulihan:")
 	print("- Latihan aerobik 150 menit/minggu (jalan cepat, bersepeda, berenang)")
@@ -146,6 +164,8 @@ def recommend_exercise_by_bmi():
 
 	print("Catatan: Mulai perlahan jika belum aktif, naikkan intensitas bertahap, dan konsultasi tenaga kesehatan jika perlu.")
 
+	motivational_quotes()
+
 
 def calc_calories():
 	try:
@@ -183,6 +203,9 @@ def calc_calories():
 	print("Contoh pembagian porsi untuk 2000 kcal:")
 	print("- Karbohidrat: 225-275 g | Protein: 75-125 g | Lemak: 55-78 g")
 
+	# Tampilkan motivasi otomatis setelah kalkulasi kebutuhan kalori
+	motivational_quotes()
+
 
 def menu():
 	while True:
@@ -195,6 +218,7 @@ def menu():
 		print("5. Hitung kebutuhan kalori (personal)")
 		print("6. Rekomendasi olahraga sesuai berat/BMI")
 		print("7. Rekomendasi makanan harian & mingguan")
+		print("8. Kata-kata motivasi untuk semangat hidup sehat")
 		print("0. Keluar")
 		choice = input("Masukkan pilihan: ").strip()
 		if choice == "1":
@@ -211,6 +235,8 @@ def menu():
 			recommend_exercise_by_bmi()
 		elif choice == "7":
 			recommend_meals_detailed()
+		elif choice == "8":
+			motivational_quotes()
 		elif choice == "0":
 			print("Terima kasih — semoga hidup sehat!")
 			break
