@@ -44,6 +44,42 @@ def meal_plan_examples():
 	print("- Camilan (pilih sehat): yogurt rendah gula, buah, kacang 20-30g")
 
 
+def recommend_meals_detailed():
+	"""Rekomendasi makanan sehat dengan takaran porsi harian dan contoh jadwal mingguan."""
+	print("\nRekomendasi Pola Makan Harian (takaran contoh):")
+	print("- Sarapan (350-450 kcal):")
+	print("  * 1 porsi karbohidrat: nasi 100g matang (1/2 piring) atau 2 iris roti gandum")
+	print("  * Protein: telur 1-2 butir atau yogurt 150g atau tahu/tempe 100g")
+	print("  * Sayur/buah: 1 porsi (1 buah sedang atau 1 genggam sayur)")
+	print("- Makan siang (500-700 kcal):")
+	print("  * Karbohidrat: nasi 150g matang (1 piring sedang)")
+	print("  * Protein: ayam/ikan 100-150g atau sumber nabati setara")
+	print("  * Sayur: 1 piring sayur berwarna")
+	print("- Makan malam (400-600 kcal, lebih ringan):")
+	print("  * Karbohidrat: 75-100g nasi matang (1/3-1/2 piring)")
+	print("  * Protein + sayur: porsi moderat, hindari makan berat 2 jam sebelum tidur")
+	print("- Camilan (2x sehari):")
+	print("  * Pagi: buah atau yogurt; Sore: kacang 20-30g atau buah potong")
+
+	print("\nContoh Rencana Mingguan (variasi sederhana untuk 7 hari):")
+	week = [
+		("Senin", "Sarapan: Oat+pisang+kacang | Makan siang: Nasi+ikan+sayur | Makan malam: Salad+ayam") ,
+		("Selasa", "Sarapan: Roti gandum+telur | Makan siang: Nasi+tahu/tempe+sayur | Makan malam: Sup sayur+ikan") ,
+		("Rabu", "Sarapan: Smoothie (buah+yogurt) | Makan siang: Nasi+ayam panggang+sayur | Makan malam: Tumis sayur+tempe") ,
+		("Kamis", "Sarapan: Bubur gandum+buah | Makan siang: Nasi+ikan kukus+sayur | Makan malam: Salad+telur rebus") ,
+		("Jumat", "Sarapan: Pancake gandum+buah | Makan siang: Nasi+ayam kecap (sedikit minyak)+sayur | Makan malam: Sup kacang+sayur") ,
+		("Sabtu", "Sarapan: Telur orak-arik+roti gandum | Makan siang: Nasi+ikan bakar+lalapan | Makan malam: Pizza sehat (sayur + sedikit keju)") ,
+		("Minggu", "Sarapan: Yogurt+granola+buah | Makan siang: Nasi+tahu/tempe+sayur | Makan malam: Hidangan ringan, sayur dan protein") ,
+	]
+	for day, plan in week:
+		print(f"- {day}: {plan}")
+
+	print("\nTips perencanaan mingguan:")
+	print("- Siapkan sayur/buah untuk beberapa hari (meal prep) agar konsisten.")
+	print("- Variasikan sumber protein (ikan, ayam, kacang-kacangan, tahu/tempe).")
+	print("- Jika ingin menurunkan berat badan, kurangi 300-500 kcal/hari dari kebutuhan estimasi; jika menambah berat, tambah 300-500 kcal/hari dengan fokus protein.")
+
+
 def exercise_and_recovery():
 	print("\nRekomendasi Olahraga & Pemulihan:")
 	print("- Latihan aerobik 150 menit/minggu (jalan cepat, bersepeda, berenang)")
@@ -158,6 +194,7 @@ def menu():
 		print("4. Air & tidur")
 		print("5. Hitung kebutuhan kalori (personal)")
 		print("6. Rekomendasi olahraga sesuai berat/BMI")
+		print("7. Rekomendasi makanan harian & mingguan")
 		print("0. Keluar")
 		choice = input("Masukkan pilihan: ").strip()
 		if choice == "1":
@@ -172,6 +209,8 @@ def menu():
 			calc_calories()
 		elif choice == "6":
 			recommend_exercise_by_bmi()
+		elif choice == "7":
+			recommend_meals_detailed()
 		elif choice == "0":
 			print("Terima kasih — semoga hidup sehat!")
 			break
