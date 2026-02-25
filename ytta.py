@@ -59,6 +59,58 @@ def hydration_sleep():
 	print("- Kurangi kafein sore/malam agar tidur lebih baik")
 
 
+def recommend_exercise_by_bmi():
+	"""Rekomendasi olahraga berdasarkan BMI (menggunakan berat dan tinggi).
+	Jika tinggi tidak diberikan, gunakan rentang berat sebagai fallback.
+	"""
+	try:
+		weight = float(input("Berat (kg): ").strip())
+	except Exception:
+		print("Berat tidak valid.")
+		return
+
+	height_input = input("Tinggi (cm) [opsional, tekan Enter jika tidak tahu]: ").strip()
+	bmi = None
+	if height_input:
+		try:
+			height_cm = float(height_input)
+			if height_cm <= 0:
+				raise ValueError()
+			height_m = height_cm / 100.0
+			bmi = weight / (height_m * height_m)
+			print(f"BMI Anda: {bmi:.1f}")
+		except Exception:
+			print("Tinggi tidak valid, menggunakan rekomendasi berdasarkan berat saja.")
+			bmi = None
+
+	print("\nRekomendasi olahraga:")
+	if bmi is not None:
+		if bmi < 18.5:
+			print("- Kategori: Kurang berat (underweight). Fokus pada latihan kekuatan ringan dan peningkatan massa otot.")
+			print("  Contoh: latihan beban tubuh 2-3x/minggu, 2-3 set x 8-12 repetisi; jalan santai 3x/minggu 20-30 menit.")
+		elif bmi < 25:
+			print("- Kategori: Normal. Kombinasikan kardio dan kekuatan untuk pemeliharaan kebugaran.")
+			print("  Contoh: jalan cepat/bersepeda 30-45 menit, 3-5x/minggu; latihan kekuatan 2x/minggu.")
+		elif bmi < 30:
+			print("- Kategori: Kelebihan berat (overweight). Prioritaskan aktivitas kardiovaskular berdampak rendah dan latihan kekuatan.")
+			print("  Contoh: jalan cepat 30-45 menit 5x/minggu, berenang/sepeda; latihan kekuatan 2x/minggu untuk menjaga massa otot.")
+		else:
+			print("- Kategori: Obesitas. Mulai dengan aktivitas berdampak rendah, tingkatkan durasi secara bertahap.")
+			print("  Contoh: jalan ringan 20-30 menit 4-6x/minggu, berenang atau aerobik air; konsultasi medis jika ada kondisi penyerta.")
+	else:
+		# fallback berdasarkan berat saja
+		if weight < 50:
+			print("- Berat <50kg: latihan campuran (kekuatan + kardio ringan). Perhatikan asupan kalori jika ingin menambah berat.)")
+		elif weight < 70:
+			print("- Berat 50-70kg: latihan campuran, 150 menit kardio moderat/minggu + 2 sesi kekuatan.")
+		elif weight < 90:
+			print("- Berat 70-90kg: fokus pada kardio berdampak rendah (jalan, sepeda) dan latihan kekuatan moderat.")
+		else:
+			print("- Berat >=90kg: mulai dengan kardio berdampak rendah, jaga intensitas rendah sampai adaptasi; konsultasi medis disarankan jika ada keluhan.")
+
+	print("Catatan: Mulai perlahan jika belum aktif, naikkan intensitas bertahap, dan konsultasi tenaga kesehatan jika perlu.")
+
+
 def calc_calories():
 	try:
 		sex = input("Jenis kelamin (l/p): ").strip().lower()
@@ -105,6 +157,7 @@ def menu():
 		print("3. Olahraga & istirahat")
 		print("4. Air & tidur")
 		print("5. Hitung kebutuhan kalori (personal)")
+		print("6. Rekomendasi olahraga sesuai berat/BMI")
 		print("0. Keluar")
 		choice = input("Masukkan pilihan: ").strip()
 		if choice == "1":
@@ -117,6 +170,8 @@ def menu():
 			hydration_sleep()
 		elif choice == "5":
 			calc_calories()
+		elif choice == "6":
+			recommend_exercise_by_bmi()
 		elif choice == "0":
 			print("Terima kasih — semoga hidup sehat!")
 			break
